@@ -1,28 +1,26 @@
 const { Model, DataTypes } = require("sequelize");
 
-class User extends Model {
+class Tech extends Model {
   static init(sequelize) {
     super.init(
       {
         name: DataTypes.STRING,
-        email: DataTypes.STRING,
       },
       {
         sequelize,
+        tableName: "techs"
       }
     );
   }
   static associate(models) {
-    // Um usuário possui vários endereços, a foreignKey continua como "user_id", pois está referenciando a coluna que está na tabela addresses, é o inverso do "belongsTo"
-    this.hasMany(models.Address, { foreignKey: "user_id", as: "addresses" });
-    this.belongsToMany(models.Tech, {
+    this.belongsToMany(models.User, {
       // Nome da chave estrangeira
-      foreignKey: "user_id",
+      foreignKey: "tech_id",
       // A tabela que corresponde ao relacionamento entre usuários e tecnologias, cada usuário pode ter várias tecnologias
       through: "user_techs",
-      as: "techs",
+      as: "users",
     });
   }
 }
 
-module.exports = User;
+module.exports = Tech;
