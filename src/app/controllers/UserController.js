@@ -16,6 +16,8 @@ class UserController {
     try {
       const { name, email } = request.body;
 
+      if(!name || !email) return response.status(400).json("Por favor, preencher todos os campos")
+
       const emailAlreadyInUse = await User.findOne({ where: { email } })
 
       if(emailAlreadyInUse) return response.status(409).json('Email já em uso')
