@@ -19,7 +19,7 @@ class UserController {
 
       const user = await User.create({ name, email });
 
-      return response.json(user);
+      return response.status(201).json(user);
     } catch (error) {
       return response.status(400).json();
     }
