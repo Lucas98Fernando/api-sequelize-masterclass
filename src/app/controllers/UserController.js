@@ -12,7 +12,13 @@ class UserController {
   async store(request, response) {
     try {
       const { name, email } = request.body;
+
+      const emailAlreadyInUse = await User.findOne({ where: { email } })
+
+      if(emailAlreadyInUse) return response.status(409).json('Email já em uso')
+
       const user = await User.create({ name, email });
+
       return response.json(user);
     } catch (error) {
       return response.status(400).json();
