@@ -4,6 +4,9 @@ class UserController {
   async index(request, response) {
     try {
       const users = await User.findAll();
+
+      if(!users.length) return response.json('Nenhum usuário encontrado')
+
       return response.json(users);
     } catch (error) {
       return response.status(400).json();
