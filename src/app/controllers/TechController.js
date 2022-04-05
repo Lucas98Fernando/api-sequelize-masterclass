@@ -27,7 +27,7 @@ class TechController {
 
       const user = await User.findByPk(user_id);
 
-      if (!user) return res.status(400).json({ error: "User not found" });
+      if (!user) return res.status(404).json({ error: "User not found" });
 
       const [tech] = await Tech.findOrCreate({ where: { name } });
 
