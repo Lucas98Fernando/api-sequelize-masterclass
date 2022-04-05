@@ -26,7 +26,7 @@ class AddressController {
       user_id,
     });
 
-    return res.json(address);
+    return res.status(201).json(address);
   }
 }
 

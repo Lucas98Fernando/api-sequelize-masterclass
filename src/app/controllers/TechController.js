@@ -33,7 +33,8 @@ class TechController {
 
       // Quando um relacionamento N-N é adicionando em um model, o sequelize cria métodos auxiliares para tratar esses os dados para esses relacionamentos
       await user.addTech(tech);
-      return res.json();
+      
+      return res.status(201).json();
     } catch (error) {
       return res.status(400).json();
     }
